@@ -6,7 +6,7 @@ import stylesClasses from "src/pages/Rooms/components/CreateRoomModal/styles.mod
 
 interface CreateRoomModalProps {
   isOpen: boolean;
-  handleClose: () => void;
+  handleClose: (modalName: "roomName" | "userName") => void;
   handleCreateRoom: (roomName: string) => void;
 }
 
@@ -27,15 +27,16 @@ const CreateRoomModal = ({
 
     if (trimmedRoomName.length > 3) {
       handleCreateRoom(roomName);
-      handleClose();
+      handleClose("roomName");
     }
+    setRoomName("");
   };
 
   return (
     <Modal
       className={stylesClasses.modalWindow}
       open={isOpen}
-      onClose={handleClose}
+      onClose={() => handleClose("roomName")}
     >
       <form className={stylesClasses.wrapper} onSubmit={handleSubmit}>
         <Input
