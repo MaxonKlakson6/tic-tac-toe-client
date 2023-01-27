@@ -9,8 +9,10 @@ import type { Room } from "src/types/room";
 const RoomsContainer = (): JSX.Element => {
   const wsServer = useContext(SocketContext);
   const navigate = useNavigate();
+
   const [rooms, setRooms] = useState<Room[]>([]);
   const [idToJoin, setIdToJoin] = useState<string>("");
+
   const handleCreateRoom = (roomName: string): void => {
     wsServer.emit("create-room", roomName);
   };

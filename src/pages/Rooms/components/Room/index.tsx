@@ -12,6 +12,7 @@ interface RoomProps {
   name: string;
   usersCount: number;
   changeIdToJoin: (id: string) => void;
+  createError: (error: string) => void;
   handleOpenModal: (modalName: "roomName" | "userName") => void;
 }
 
@@ -20,9 +21,15 @@ const Room = ({
   name,
   usersCount,
   changeIdToJoin,
+  createError,
   handleOpenModal,
 }: RoomProps): JSX.Element => {
   const handleStartJoin = () => {
+    if (usersCount === 2) {
+      createError("Maximum 2 users in a room");
+      return;
+    }
+
     changeIdToJoin(id);
     handleOpenModal("userName");
   };

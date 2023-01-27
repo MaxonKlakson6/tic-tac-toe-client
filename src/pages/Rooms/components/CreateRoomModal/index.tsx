@@ -7,12 +7,14 @@ import stylesClasses from "src/pages/Rooms/components/CreateRoomModal/styles.mod
 interface CreateRoomModalProps {
   isOpen: boolean;
   handleClose: (modalName: "roomName" | "userName") => void;
+  createError: (error: string) => void;
   handleCreateRoom: (roomName: string) => void;
 }
 
 const CreateRoomModal = ({
   isOpen,
   handleClose,
+  createError,
   handleCreateRoom,
 }: CreateRoomModalProps): JSX.Element => {
   const [roomName, setRoomName] = useState<string>("");
@@ -25,7 +27,9 @@ const CreateRoomModal = ({
     event.preventDefault();
     const trimmedRoomName = roomName.trim();
 
-    if (trimmedRoomName.length > 3) {
+    if (trimmedRoomName.length < 3) {
+      createError("Require 3 symbols at least");
+    } else {
       handleCreateRoom(roomName);
       handleClose("roomName");
     }

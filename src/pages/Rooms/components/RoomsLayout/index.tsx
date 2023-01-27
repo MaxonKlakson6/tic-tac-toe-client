@@ -4,7 +4,9 @@ import { Button } from "@mui/material";
 import CreateRoomModal from "src/pages/Rooms/components/CreateRoomModal";
 import JoinRoomModal from "src/pages/Rooms/components/JoinRoomModal";
 import Room from "src/pages/Rooms/components/Room";
+import SnackBar from "src/components/SnackBar";
 
+import { createPosition } from "src/helpers/createPosition";
 import type { Room as RoomType } from "src/types/room";
 import stylesClasses from "src/pages/Rooms/components/RoomsLayout/styles.module.scss";
 
@@ -25,6 +27,16 @@ const RoomsLayout = ({
     roomName: false,
     userName: false,
   });
+
+  const [error, setError] = useState<string>("");
+
+  const resetError = () => {
+    setError("");
+  };
+
+  const handleChangeError = (error: string) => {
+    setError(error);
+  };
 
   const handleToggleModals = (modalName: "roomName" | "userName") => {
     setModals((prevState) => ({
@@ -50,6 +62,7 @@ const RoomsLayout = ({
             name={room.name}
             usersCount={room.users.length}
             changeIdToJoin={changeIdToJoin}
+            createError={handleChangeError}
             handleOpenModal={handleToggleModals}
           />
         ))}
@@ -57,6 +70,7 @@ const RoomsLayout = ({
       <CreateRoomModal
         isOpen={modals.roomName}
         handleCreateRoom={handleCreateRoom}
+        createError={handleChangeError}
         handleClose={handleToggleModals}
       />
       <JoinRoomModal
@@ -64,6 +78,15 @@ const RoomsLayout = ({
         handleJoinRoom={handleJoinRoom}
         handleClose={handleToggleModals}
       />
+      {error && (
+        <SnackBar
+          message={error}
+          severity={"error"}
+          duration={2000}
+          position={createPosition("top", "center")}
+          onClose={resetError}
+        />
+      )}
     </div>
   );
 };

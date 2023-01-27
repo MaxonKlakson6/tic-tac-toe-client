@@ -21,7 +21,6 @@ const FinishGameModal = ({ message }: FinishGameModal): JSX.Element => {
     }, 2000);
 
     return () => {
-      console.log(1);
       wsServer.emit("delete-room", roomId);
       clearTimeout(timeout);
     };

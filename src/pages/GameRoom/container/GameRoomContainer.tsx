@@ -2,8 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import GameRoomLayout from "src/pages/GameRoom/components/GameRoomLayout";
+import SnackBar from "src/components/SnackBar";
+
+import { createPosition } from "src/helpers/createPosition";
 import { SocketContext } from "src/context";
 import { ROUTE_NAMES } from "src/router/routeNames";
+
 import type { User } from "src/types/user";
 import type { Room } from "src/types/room";
 
@@ -21,11 +25,20 @@ const GameRoomContainer = (): JSX.Element => {
     turn: "",
   });
   const [finishGameMessage, setFinishGameMessage] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const handleTurn = (index: number) => {
+    if (room.turn !== user.symbol) {
+      setError("Now enemy turn");
+    }
+
     if (room.turn === user.symbol && !room.fields[index]) {
       wsServer.emit("change-turn", { index, symbol: user.symbol, roomId });
     }
+  };
+
+  const resetError = () => {
+    setError("");
   };
 
   wsServer
@@ -56,12 +69,23 @@ const GameRoomContainer = (): JSX.Element => {
     };
   }, []);
   return (
-    <GameRoomLayout
-      room={room}
-      user={user}
-      handleChangeTurn={handleTurn}
-      finishGameMessage={finishGameMessage}
-    />
+    <>
+      <GameRoomLayout
+        room={room}
+        user={user}
+        handleChangeTurn={handleTurn}
+        finishGameMessage={finishGameMessage}
+      />
+      {error && (
+        <SnackBar
+          message={error}
+          severity="error"
+          duration={2000}
+          position={createPosition("top", "center")}
+          onClose={resetError}
+        />
+      )}
+    </>
   );
 };
 
