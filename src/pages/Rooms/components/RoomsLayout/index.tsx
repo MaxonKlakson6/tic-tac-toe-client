@@ -1,10 +1,12 @@
-import { Button } from "@mui/material";
 import { useState } from "react";
+import { Button } from "@mui/material";
+
 import CreateRoomModal from "src/pages/Rooms/components/CreateRoomModal";
-import type { Room as RoomType } from "src/types/room";
-import Room from "src/pages/Rooms/components/Room";
-import stylesClasses from "src/pages/Rooms/components/RoomsLayout/styles.module.scss";
 import JoinRoomModal from "src/pages/Rooms/components/JoinRoomModal";
+import Room from "src/pages/Rooms/components/Room";
+
+import type { Room as RoomType } from "src/types/room";
+import stylesClasses from "src/pages/Rooms/components/RoomsLayout/styles.module.scss";
 
 interface RoomsLayoutProps {
   rooms: RoomType[];
