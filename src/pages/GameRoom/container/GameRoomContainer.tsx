@@ -27,7 +27,7 @@ const GameRoomContainer = (): JSX.Element => {
   const [finishGameMessage, setFinishGameMessage] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const handleTurn = (index: number) => {
+  const handleTurn = (index: number): void => {
     if (room.turn !== user.symbol) {
       setError("Now enemy turn");
     }
@@ -37,7 +37,7 @@ const GameRoomContainer = (): JSX.Element => {
     }
   };
 
-  const resetError = () => {
+  const resetError = (): void => {
     setError("");
   };
 
@@ -63,9 +63,7 @@ const GameRoomContainer = (): JSX.Element => {
 
     return () => {
       wsServer.emit("leave-room", roomId);
-      if (!finishGameMessage) {
-        wsServer.emit("reset-room", roomId);
-      }
+      wsServer.emit("reset-room", roomId);
     };
   }, []);
   return (

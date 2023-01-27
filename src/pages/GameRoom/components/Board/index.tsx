@@ -6,7 +6,7 @@ interface BoardProps {
   handleChangeTurn: (index: number) => void;
 }
 
-const Board = ({ fields, handleChangeTurn }: BoardProps) => {
+const Board = ({ fields, handleChangeTurn }: BoardProps): JSX.Element => {
   return (
     <div className={stylesClasses.board}>
       {fields.map((fieldValue, index) => (

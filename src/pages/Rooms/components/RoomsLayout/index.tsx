@@ -30,15 +30,15 @@ const RoomsLayout = ({
 
   const [error, setError] = useState<string>("");
 
-  const resetError = () => {
+  const resetError = (): void => {
     setError("");
   };
 
-  const handleChangeError = (error: string) => {
+  const handleChangeError = (error: string): void => {
     setError(error);
   };
 
-  const handleToggleModals = (modalName: "roomName" | "userName") => {
+  const handleToggleModals = (modalName: "roomName" | "userName"): void => {
     setModals((prevState) => ({
       ...prevState,
       [modalName]: !modals[modalName],

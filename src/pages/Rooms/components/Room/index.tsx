@@ -24,7 +24,7 @@ const Room = ({
   createError,
   handleOpenModal,
 }: RoomProps): JSX.Element => {
-  const handleStartJoin = () => {
+  const handleStartJoin = (): void => {
     if (usersCount === 2) {
       createError("Maximum 2 users in a room");
       return;

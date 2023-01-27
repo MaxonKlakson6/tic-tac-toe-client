@@ -23,7 +23,7 @@ const RoomsContainer = (): JSX.Element => {
     }
   };
 
-  const changeIdToJoin = (id: string) => {
+  const changeIdToJoin = (id: string): void => {
     setIdToJoin(id);
   };
 

@@ -19,11 +19,11 @@ const CreateRoomModal = ({
 }: CreateRoomModalProps): JSX.Element => {
   const [roomName, setRoomName] = useState<string>("");
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setRoomName(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
     const trimmedRoomName = roomName.trim();
 

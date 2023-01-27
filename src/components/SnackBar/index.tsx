@@ -21,7 +21,7 @@ const SnackBar = ({
 }: SnackBarProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  const handleOpenChange = () => {
+  const handleOpenChange = (): void => {
     setIsOpen(false);
 
     if (onClose) {
